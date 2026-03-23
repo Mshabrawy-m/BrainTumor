@@ -1,0 +1,78 @@
+# Secrets - never commit API keys
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+.env.*
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Cache and temp
+.cache/
+*.cache
+tmp/
+temp/
+*.tmp
+
+# Logs
+*.log
+logs/
+
+# Model files (too large for GitHub, use alternative hosting)
+*.h5
+*.keras
+*.pkl
+*.pickle
+*.joblib
+
+# Data files
+data/raw/
+data/processed/
+*.csv
+*.json
+*.xml
+*.yaml
+*.yml
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# Streamlit specific
+.streamlit/config.toml
