@@ -1,6 +1,0 @@
-@echo off
-echo Setting Groq API Key...
-set GROQ_API_KEY=YOUR_GROQ_API_KEY_HERE
-echo Starting Brain Tumor MRI AI Assistant...
-streamlit run app.py
-pause

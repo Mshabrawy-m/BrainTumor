@@ -121,34 +121,14 @@ def load_model_cached():
 
 
 def get_groq_api_key() -> Optional[str]:
-    """Get Groq API key from multiple sources with fallback."""
-    # Method 1: Streamlit secrets (highest priority)
+    """Get Groq API key from Streamlit secrets or environment."""
     try:
         if "GROQ_API_KEY" in st.secrets:
             return st.secrets["GROQ_API_KEY"]
     except Exception:
         pass
-    
-    # Method 2: Environment variable
-    env_key = os.environ.get("GROQ_API_KEY")
-    if env_key:
-        return env_key
-    
-    # Method 3: Load from .env file (fallback)
-    try:
-        from dotenv import load_dotenv
-        load_dotenv()
-        env_key = os.environ.get("GROQ_API_KEY")
-        if env_key:
-            return env_key
-    except ImportError:
-        # python-dotenv not installed
-        pass
-    except Exception:
-        # Error loading .env file
-        pass
-    
-    return None
+        
+    return os.environ.get("GROQ_API_KEY")
 
 
 def load_image_from_bytes(image_bytes: bytes) -> Image.Image:
