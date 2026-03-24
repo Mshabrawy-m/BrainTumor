@@ -1,76 +1,59 @@
-# Brain Tumor MRI AI Assistant
+# 🧠 Brain Tumor MRI AI Assistant
 
-An AI-powered application for brain tumor MRI analysis. Upload an MRI scan, get tumor classification (glioma, meningioma, pituitary, no tumor), and ask questions via a specialized LLM assistant.
+An advanced, AI-powered web application designed to analyze Brain MRI scans, classify tumors using PyTorch Convolutional Neural Networks, and provide interactive clinical explanations via a specialized Groq-powered LLM assistant.
 
-## Features
+## ✨ Features
+- **🖼️ MRI Image Analysis** – Upload `.jpg`, `.jpeg` or `.png` scans for instant processing.
+- **🔬 Tumor Classification** – Uses a custom PyTorch model to detect 4 classes: Glioma, Meningioma, Pituitary, or No Tumor.
+- **📊 Confidence Visualizer** – Provides detailed probability bars for primary and secondary detections.
+- **💬 Clinical LLM Chat** – An integrated clinical assistant powered by Groq (Llama 3) that understands the MRI context and answers related diagnosis questions.
+- **⚡ Performance Optimized** – Features dedicated prediction workers and cached model weights for faster throughput.
 
-- **MRI Image Upload** – JPG/PNG support
-- **Tumor Classification** – TensorFlow CNN predicts: glioma, meningioma, pituitary, no_tumor
-- **Confidence Bar** – Visual confidence score display
-- **Grad-CAM** – Optional visualization highlighting tumor regions
-- **Chat History** – Memory of conversation
-- **LLM Chat** – Groq (llama3-70b-8192) answers Brain Tumor MRI questions only
-- **Model Caching** – TensorFlow model loaded once for server stability
-- **Port Fallback** – Use `--server.port 8502` if 8501 is busy
+## 🚀 Quick Start
 
-## Quick Start
-
+### 1. Installation
+Clone the repository and install the required dependencies:
 ```bash
-cd brain_tumor_mri_ai
+git clone https://github.com/Mshabrawy-m/BrainTumor.git
+cd BrainTumor
 pip install -r requirements.txt
-streamlit run app.py
 ```
 
-**If port 8501 is busy:**
-```bash
-streamlit run app.py --server.port 8502
+### 2. API Key Configuration
+To enable the Clinical Chat Assistant, you need a free Groq API key:
+- Set it as an environment variable: `GROQ_API_KEY="your_api_key"`
+- Or create a `.streamlit/secrets.toml` file with:
+  ```toml
+  GROQ_API_KEY = "your_api_key"
+  ```
+
+### 3. Run the Application
+You can start the application using one of the provided scripts in the `scripts/` folder:
+- **Windows Shortcut** (Recommended): Double-click `scripts/RUN_APP.vbs` to start the server in the background and open your browser automatically.
+- **Batch Script**: Double-click `scripts/START_APP.bat` to run the active server in a terminal.
+- **Command Line**: Run `streamlit run app.py` anywhere in the root directory.
+
+## 📂 Project Structure
+```text
+BrainTumor/
+├── models/
+│   ├── best_brain_tumor_model.pth        # Optimized state_dict PyTorch model
+│   └── brain_tumor_model_complete.pth    # Complete PyTorch model with metadata
+├── scripts/
+│   ├── RUN_APP.vbs                       # Background Windows starter
+│   ├── START_APP.bat                     # Foreground batch starter
+│   └── run.bat                           # Alternative batch starter
+├── src/
+│   ├── exact_brain_tumor_model.py        # PyTorch Neural Network architecture
+│   ├── llm_cache.py                      # Groq API integration and prompt logic
+│   ├── predict_worker.py                 # Multi-processing prediction worker
+│   └── utils/
+│       └── utils.py                      # Shared application utilities
+├── app.py                                # Main Streamlit Web Interface
+├── Dockerfile                            # Docker container configuration
+├── DEPLOYMENT.md                         # Deployment guide and instructions
+└── requirements.txt                      # Project dependencies
 ```
 
-**To start (pick one):**
-- **Double-click `RUN_APP.vbs`** – Opens a new window (recommended)
-- **Double-click `START_APP.bat`** – Opens in current window
-- **Terminal:** `.\run.bat` or `streamlit run app.py`
-
-**Connection error?** Keep the CMD window open. Close it = app stops.
-
-## Model
-
-The app looks for a trained model in this order:
-
-1. `tumor_model.h5` (in this folder)
-2. `../best_cnn_model.h5` (parent folder)
-
-Place your trained `.h5` model in one of these locations.
-
-## API Key
-
-Set your Groq API key via:
-
-- **Option A:** `.streamlit/secrets.toml` → `GROQ_API_KEY = "your-key"`
-- **Option B:** Environment variable `GROQ_API_KEY`
-
-## Error Handling
-
-The app handles:
-- Invalid uploaded files
-- Image preprocessing failures
-- Model loading errors
-- Groq API failures
-
-## Project Structure
-
-```
-brain_tumor_mri_ai/
-├── app.py           # Streamlit UI
-├── model.py         # TensorFlow prediction
-├── llm.py           # Groq LLM integration
-├── prompts.py       # System/user prompts
-├── utils.py         # Image preprocessing
-├── grad_cam.py      # Grad-CAM visualization
-├── requirements.txt
-├── run.bat          # Windows run script
-├── run.ps1          # PowerShell run script
-└── .streamlit/
-    ├── config.toml  # Server config
-    └── secrets.toml # API key
-```
+## ⚠️ Disclaimer
+*This tool is designed for educational and research purposes and is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified physician.*
