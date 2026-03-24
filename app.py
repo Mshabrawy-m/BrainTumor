@@ -276,7 +276,7 @@ def main():
         # Optional placeholder aesthetic display when empty
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
-            st.image("https://cdn-icons-png.flaticon.com/512/2864/2864320.png", use_container_width=True)
+            st.image("https://cdn-icons-png.flaticon.com/512/2864/2864320.png", width='stretch')
         return
 
     # Read bytes safely
@@ -299,7 +299,7 @@ def main():
     
     with col1:
         st.markdown('<p class="section-header">🖼️ MRI Scan Preview</p>', unsafe_allow_html=True)
-        st.image(display_image, use_container_width=True, caption=uploaded_file.name)
+        st.image(display_image, width='stretch', caption=uploaded_file.name)
         
     with col2:
         st.markdown('<p class="section-header">🔬 Analysis Results</p>', unsafe_allow_html=True)
