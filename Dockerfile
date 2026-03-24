@@ -20,13 +20,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create data directory
-RUN mkdir -p data
+# Create models directory
+RUN mkdir -p models
 
 # Download model (if MODEL_URL is provided)
 ARG MODEL_URL
 RUN if [ -n "$MODEL_URL" ]; then \
-        wget -O data/best_cnn_model.h5 "$MODEL_URL"; \
+        wget -O models/best_brain_tumor_model.pth "$MODEL_URL"; \
     fi
 
 # Expose port

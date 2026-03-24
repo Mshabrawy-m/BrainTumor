@@ -16,7 +16,7 @@ from PIL import Image
 import torchvision.transforms as transforms
 
 from src.llm_cache import fast_chat as llm_chat
-from exact_brain_tumor_model import BrainTumorCNN, load_brain_tumor_model
+from src.exact_brain_tumor_model import BrainTumorCNN, load_brain_tumor_model
 
 # Page config - must be first Streamlit command
 st.set_page_config(
@@ -100,11 +100,11 @@ def load_model_cached():
     """Load and cache PyTorch model for better performance."""
     try:
         # Try to load complete model first (with metadata)
-        if os.path.exists('brain_tumor_model_complete.pth'):
-            model, device, metadata = load_brain_tumor_model('brain_tumor_model_complete.pth', 'complete')
+        if os.path.exists('models/brain_tumor_model_complete.pth'):
+            model, device, metadata = load_brain_tumor_model('models/brain_tumor_model_complete.pth', 'complete')
             return model, device, metadata, "✅ Complete model loaded"
-        elif os.path.exists('best_brain_tumor_model.pth'):
-            model, device, metadata = load_brain_tumor_model('best_brain_tumor_model.pth', 'state_dict')
+        elif os.path.exists('models/best_brain_tumor_model.pth'):
+            model, device, metadata = load_brain_tumor_model('models/best_brain_tumor_model.pth', 'state_dict')
             # Set default metadata
             metadata = {
                 'class_names': ['glioma', 'meningioma', 'notumor', 'pituitary'],
@@ -114,7 +114,7 @@ def load_model_cached():
             }
             return model, device, metadata, "✅ State dict model loaded"
         else:
-            return None, None, None, "❌ No PyTorch model found. Please place 'brain_tumor_model_complete.pth' in the app directory."
+            return None, None, None, "❌ No PyTorch model found. Please place 'brain_tumor_model_complete.pth' in the models directory."
         
     except Exception as e:
         return None, None, None, f"❌ Failed to load PyTorch model: {str(e)}"

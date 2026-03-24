@@ -13,7 +13,7 @@ git push origin main
 ### Step 2: GitHub Release for Model
 ```bash
 # Create GitHub release and upload model
-gh release create v1.0 data/best_cnn_model.h5 --title "Model Files" --notes "Pre-trained CNN model for brain tumor classification"
+gh release create v1.0 models/best_brain_tumor_model.pth --title "Model Files" --notes "Pre-trained CNN model for brain tumor classification"
 ```
 
 ### Step 3: Streamlit Cloud Setup
@@ -29,7 +29,7 @@ gh release create v1.0 data/best_cnn_model.h5 --title "Model Files" --notes "Pre
 Set these in Streamlit Cloud secrets:
 ```toml
 GROQ_API_KEY = "your_groq_api_key_here"
-MODEL_URL = "https://github.com/yourusername/brain-tumor-mri-ai/releases/download/v1.0/best_cnn_model.h5"
+MODEL_URL = "https://github.com/yourusername/brain-tumor-mri-ai/releases/download/v1.0/best_brain_tumor_model.pth"
 ```
 
 ### Step 5: Deploy
@@ -51,7 +51,7 @@ docker run -p 8501:8501 -e GROQ_API_KEY=your_key brain-tumor-mri-ai
 ### Docker with Model URL
 ```bash
 # Build with model download
-docker build --build-arg MODEL_URL=https://github.com/yourusername/brain-tumor-mri-ai/releases/download/v1.0/best_cnn_model.h5 -t brain-tumor-mri-ai .
+docker build --build-arg MODEL_URL=https://github.com/yourusername/brain-tumor-mri-ai/releases/download/v1.0/best_brain_tumor_model.pth -t brain-tumor-mri-ai .
 
 # Run
 docker run -p 8501:8501 -e GROQ_API_KEY=your_key brain-tumor-mri-ai
