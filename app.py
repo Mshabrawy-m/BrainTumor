@@ -4,7 +4,6 @@ Streamlit application for MRI upload, tumor classification, and LLM-assisted Q&A
 Uses PyTorch for model inference with proper CPU optimization.
 """
 
-import base64
 import json
 import os
 import io
@@ -133,9 +132,7 @@ def get_groq_api_key() -> Optional[str]:
     if env_key:
         return env_key
 
-    # Default key (encoded) for public deployment
-    _d = "Z3NrX1ZMTXc2TmhGZG9TNFhJdGhLZm1pV0dkeWIzRllKOEtDZGZ6STZOUUN5MU5pZ2RaYXh3SzA="
-    return base64.b64decode(_d).decode()
+    return None
 
 
 def load_image_from_bytes(image_bytes: bytes) -> Image.Image:
@@ -283,7 +280,7 @@ def main():
         # Optional placeholder aesthetic display when empty
         col1, col2, col3 = st.columns([1,2,1])
         with col2:
-            st.image("https://cdn-icons-png.flaticon.com/512/2864/2864320.png", width='stretch')
+            st.image("https://cdn-icons-png.flaticon.com/512/2864/2864320.png", use_container_width=True)
         return
 
     # Read bytes safely
@@ -306,7 +303,7 @@ def main():
     
     with col1:
         st.markdown('<p class="section-header">🖼️ MRI Scan Preview</p>', unsafe_allow_html=True)
-        st.image(display_image, width='stretch', caption=uploaded_file.name)
+        st.image(display_image, use_container_width=True, caption=uploaded_file.name)
         
     with col2:
         st.markdown('<p class="section-header">🔬 Analysis Results</p>', unsafe_allow_html=True)

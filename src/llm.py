@@ -1,6 +1,6 @@
 """
 Groq LLM integration for Brain Tumor MRI Q&A.
-Uses openai/gpt-oss-120b model.
+Uses llama-3.3-70b-versatile model (high TPM limit on free tier).
 """
 
 import os
@@ -11,7 +11,7 @@ from groq.types.chat import ChatCompletion
 
 from .prompts import SYSTEM_PROMPT, build_user_prompt
 
-GROQ_MODEL = "openai/gpt-oss-120b"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 
 def get_groq_client(api_key: Optional[str] = None) -> Groq:
@@ -52,8 +52,8 @@ def chat(
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt},
         ],
-        temperature=1,
-        max_tokens=8192,
+        temperature=0.7,
+        max_tokens=1024,
         top_p=1,
         stream=False,
         stop=None
