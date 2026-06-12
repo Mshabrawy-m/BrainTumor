@@ -239,15 +239,6 @@ def build_sidebar():
 
 
 def main():
-    hide_icons_style = """
-    <style>
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
-        .stAppToolbar {visibility: hidden;} 
-    </style>
-"""
-    st.markdown(hide_icons_style, unsafe_allow_html=True)
     # Initialize session states
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
